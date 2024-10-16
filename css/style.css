@@ -1,0 +1,125 @@
+@font-face {
+    font-family: 'Matt';
+    src: url(../assets/TTF/Matt_Trial-Bold.ttf);
+}
+body{
+    margin: 0;
+    font-family: 'Matt';
+}
+header{
+}
+
+nav{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* border: solid blue; */
+    /* background-color: #18191a; */
+    -webkit-box-shadow: 0 8px 10px -6px #000000;
+    -moz-box-shadow: 0 8px 10px -6px #000000;
+    box-shadow: 0px 10px 10px -6px rgba(0, 0, 0, 0.3);
+}
+nav h1{
+  padding-right: 5px;
+  /* Create the gradient. */
+  background-image: linear-gradient(65deg, #AE7D15, #ECD24D); 
+  /* Set the background size and repeat properties. */
+  background-size: 100%;
+  background-repeat: repeat;
+  /* Use the text as a mask for the background. */
+  /* This will show the gradient as a text color rather than element bg. */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent; 
+  -moz-background-clip: text;
+  -moz-text-fill-color: transparent;
+}
+nav svg{
+    /* margin-top: 1em; */
+    width: 10%;
+}
+main{
+    margin-top: 2em;
+    text-align: center;
+    /* height: 30vh; */
+}
+main article{
+    display: flex;
+    justify-content: center;
+    
+}
+main section{
+    display: grid; 
+    grid-template-columns: repeat(5, 1fr); /*A mettre sur la section*/
+    gap: 5px;
+    /* grid-auto-flow: row; */
+    /* grid-template-rows: repeat(autofill, 1fr); */
+    /* border: solid green; */
+    /* align-items: center; */
+
+    
+}
+main section div{
+    padding: 8px;
+    width: 27px;
+    height: 25px;
+    border: solid 1px grey ;
+}
+
+.answer-grid{
+    /* margin-top: 3em;
+    transition: all ease 4s; */
+}
+.correct{
+    background-color: red;
+}
+.present{
+    background-color: yellow;
+    border-radius: 25%;
+}
+.secretWord{
+    background-color: blue;
+}
+.section-page{
+    /* border: solid black; */
+    display: flex;
+    /* text-align: center; */
+    justify-content: center;
+    /* width: 50%; */
+    /* height: 10vh; */
+}
+
+
+
+.section-page article.keys{
+    /* border: solid red; */
+    display: flex;
+    flex-wrap: wrap;
+    width: 35%;
+}
+.section-page article img{
+    width: 39px;
+    margin-left: 10px;
+    /* height: 50px; */
+}
+
+.answer{
+    display: flex;
+    justify-content: center;
+    margin-top: 3em;
+    /* padding: 10px; */
+}
+
+.answer input{
+    padding: 10px;
+    font-size: 16px;
+    width: 150px;
+    margin-right: 10px;
+    /* border-radius: 5px; */
+}
+.answer button{
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    /* border-radius: 15px; */
+}
+

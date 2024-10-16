@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lotus</title>
+    <script src="https://unpkg.com/alpinejs" defer></script>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css"/>
+</head>
+  <body x-data="{
+    words: ['chien', 'table', 'chaud', 'mango', 'lapin', 'fruit', 'plage'],
+    guess:'',
+    tab_guess:[],
+    tab_words:[],
+    secretWord: '',
+    correctPositions:[],
+    presentLetters:[],
+    init(){
+      this.randomIndex= Math.floor(Math.random() * this.words.length);
+      this.secretWord= this.words[this.randomIndex];
+      this.correctPositions= Array(this.secretWord.length).fill(false);
+      alert(this.secretWord);
+    },
+    
+    lotus() {
+        this.tab_words=[];
+        if(this.guess.length === this.secretWord.length){
+            
+            for(let i = 0; i < this.guess.length; i++) {
+                this.tab_words.push({
+                    letter: this.guess[i],
+                    isCorrectPosition: this.guess[i] === this.secretWord[i],
+                    isPresentLetters: this.guess[i] !== this.secretWord[i] && this.secretWord.includes(this.guess[i])
+                });
+            }
+            
+        if (this.tab_guess.length < 6){
+          this.tab_guess.push(this.tab_words);
+        }
+        this.guess='';
+        <!-- alert(this.tab_guess.length); -->
+      }
+    }
+  }">
+  <!-- this.tab_words[i]= this.guess[i]; -->
+    <header>
+      <nav>
+        <!-- <img src="" alt="accueil" /> -->
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="-0.75 -0.75 16 16" stroke="#000000" aria-hidden="true" id="Home--Streamline-Heroicons-Outline" height="25" width="25"><desc>Home Streamline Icon: https://streamlinehq.com</desc><path stroke-linecap="round" stroke-linejoin="round" d="m1.359375 7.25 5.409708333333334 -5.4103125c0.2658333333333333 -0.2652291666666666 0.696 -0.2652291666666666 0.9612291666666666 0L13.140625 7.25M2.71875 5.890625v6.1171875c0 0.37518749999999995 0.3045 0.6796875 0.6796875 0.6796875H5.890625v-2.9453125c0 -0.37518749999999995 0.3045 -0.6796875 0.6796875 -0.6796875h1.359375c0.37518749999999995 0 0.6796875 0.3045 0.6796875 0.6796875V12.6875h2.4921875c0.37518749999999995 0 0.6796875 -0.3045 0.6796875 -0.6796875V5.890625M4.984375 12.6875h4.984375" stroke-width="1.5"></path></svg>
+        <!-- <h1>Lotus</h1> -->
+        <h1>
+          <em>L</em>
+          <em>O</em>
+          <em>T</em>
+          <em>U</em>
+          <em>S</em>
+        </h1>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="-0.75 -0.75 16 16" stroke="#000000" aria-hidden="true" id="Question-Mark-Circle--Streamline-Heroicons-Outline" height="25" width="25"><desc>Question Mark Circle Streamline Icon: https://streamlinehq.com</desc><path stroke-linecap="round" stroke-linejoin="round" d="M5.968562499999999 4.542729166666667c0.7074791666666667 -0.6192708333333332 1.8553958333333334 -0.6192708333333332 2.562875 0 0.7080833333333333 0.6192708333333332 0.7080833333333333 1.6233958333333331 0 2.2426666666666666 -0.12264583333333333 0.10814583333333332 -0.25979166666666664 0.19695833333333332 -0.40479166666666666 0.2670416666666667 -0.45010416666666664 0.21810416666666665 -0.8760416666666666 0.6035625 -0.8760416666666666 1.1038124999999999v0.453125M12.6875 7.25a5.4375 5.4375 0 1 1 -10.875 0 5.4375 5.4375 0 0 1 10.875 0Zm-5.4375 3.171875h0.004833333333333333v0.004833333333333333H7.25v-0.004833333333333333Z" stroke-width="1.5"></path></svg>
+      </nav>
+    </header>
+    <main class="main-page">
+      <p>Minuteur : </p>
+      <!-- GRID -->
+      <article class="grid-container">
+        <section>
+          <template x-for="(word, index) in tab_guess.slice().reverse()" >
+            <!-- Slice() : crée une copie du tableau -->
+            <template x-for="(letterInfo, i) in word" :key="i" >
+              <div x-text="letterInfo.letter" :class="{'correct' : letterInfo.isCorrectPosition, 'present' : letterInfo.isPresentLetters}"></div>
+            </template>
+          </template>
+          <div class="answer-grid"></div>
+          <div class="answer-grid"></div>
+          <div class="answer-grid"></div>
+          <div class="answer-grid"></div>
+          <div class="answer-grid"></div>
+            <!-- <div></div> -->
+            <!-- <div>T</div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            
+            <div></div>
+            <div>U</div>
+            <div></div>
+            <div></div>
+            <div></div>
+            
+            <div></div>
+            <div></div>
+            <div>L</div>
+            <div></div>
+            <div></div>
+            
+            <div></div>
+            <div></div>
+            <div></div>
+            <div>I</div>
+            <div></div>
+            
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div>P</div>
+             -->
+             <!-- <div></div>
+             <div></div>
+             <div></div>
+             <div></div>
+             <div></div> -->
+            </section>
+            
+        </article>
+      <!--  -->
+       <p>... mots restants</p>
+       <i class="fa-solid fa-house"></i>
+    </main>
+
+    <section class="answer">
+      <input type="text" placeholder="Devine le mot" maxlength="5" x-model="guess"> <!-- A changer max-lenght -->
+      <button @click="lotus()">Entrer</button>
+    </section>
+    
+
+
+
+
+
+
+    <!-- <section class="section-page">
+      <article class="keys">
+        <img src="images/A--Streamline-Ultimate.svg" alt="A" />
+        <img src="images/Z--Streamline-Ultimate.svg" alt="Z" />
+        <img src="images/E--Streamline-Ultimate.svg" alt="E" />
+        <img src="images/R--Streamline-Ultimate.svg" alt="R" />
+        <img src="images/T--Streamline-Ultimate.svg" alt="T" />
+        <img src="images/Y--Streamline-Ultimate.svg" alt="Y" />
+        <img src="images/U--Streamline-Ultimate.svg" alt="U" />
+        <img src="images/I--Streamline-Ultimate.svg" alt="I" />
+        <img src="images/O--Streamline-Ultimate.svg" alt="O" />
+        <img src="images/P--Streamline-Ultimate.svg" alt="P" />
+
+        <img src="images/Q--Streamline-Ultimate.svg" alt="Q" />
+        <img src="images/S--Streamline-Ultimate.svg" alt="S" />
+        <img src="images/D--Streamline-Ultimate.svg" alt="D" />
+        <img src="images/F--Streamline-Ultimate.svg" alt="F" />
+        <img src="images/G--Streamline-Ultimate.svg" alt="G" />
+        <img src="images/H--Streamline-Ultimate.svg" alt="H" />
+        <img src="images/J--Streamline-Ultimate.svg" alt="J" />
+        <img src="images/K--Streamline-Ultimate.svg" alt="K" />
+        <img src="images/L--Streamline-Ultimate.svg" alt="L" />
+        <img src="images/M--Streamline-Ultimate.svg" alt="M" />
+
+        <img src="images/W--Streamline-Ultimate.svg" alt="W" />
+        <img src="images/X--Streamline-Ultimate.svg" alt="X" />
+        <img src="images/C--Streamline-Ultimate.svg" alt="C" />
+        <img src="images/V--Streamline-Ultimate.svg" alt="V" />
+        <img src="images/B--Streamline-Ultimate.svg" alt="B" />
+        <img src="images/N--Streamline-Ultimate.svg" alt="N" />
+        <img src="" alt="" />
+        <img src="" alt="" />
+        <img src="images/tag-delete-svgrepo-com.svg" alt="RETOUR" />
+        <img src="images/enter2.svg" alt="CONFIRMER" />
+      </article>
+    </section> -->
+    <script>
+      const section = document.querySelector('main section');
+        const submitButton = document.getElementById('submit');
+        const guessInput = document.getElementById('guess');
+
+        submitButton.addEventListener('click', () => {
+            const guess = guessInput.value.toUpperCase(); 
+            addNewElement(guess); // Ajoute l'élément en bas
+            guessInput.value = ''; // Réinitialiser l'input
+        });
+
+        function addNewElement(letter) {
+            const newDiv = document.createElement('div');
+            newDiv.textContent = letter;
+            section.appendChild(newDiv); // Ajoute le nouvel élément à la fin (en bas)
+        }
+  </script>
+  </body>
+</html>
