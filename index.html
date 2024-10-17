@@ -11,6 +11,9 @@
   <body x-data="{
     words: ['table', 'chaud', 'mango', 'lapin', 'fruit', 'plage', 'Terre', 'Monde', 'Livre', 'Fleur', 'Balle', 'Plage', 'Pomme', 'Chien', 'Force', 'Paire', 'Lourd', 'Plume', 'Vivre', 'Maman', 'Neige'],
     guess:'',
+    open: false,
+    fail: false,
+    keep: true,
     count_guess: 6,
     tab_guess:[],
     tab_words:[],
@@ -19,13 +22,14 @@
     presentLetters:[],
     init(){
       this.randomIndex= Math.floor(Math.random() * this.words.length);
-      this.secretWord= this.words[this.randomIndex].toLowerCase();
+      this.secretWord= this.words[this.randomIndex].toUpperCase();
       this.correctPositions= Array(this.secretWord.length).fill(false);
       alert(this.secretWord);
     },
     
     lotus() {
         this.tab_words=[];
+        this.guess = this.guess.toUpperCase();
         if(this.guess.length === this.secretWord.length){
             
             for(let i = 0; i < this.guess.length; i++) {
@@ -40,6 +44,20 @@
           this.tab_guess.push(this.tab_words);
           this.count_guess--;
         }
+        if(this.guess === this.secretWord.toUpperCase()){
+          this.open=true;
+          alert(this.open && !this.fail);
+          this.count_guess=0;
+        }
+        if(this.count_guess === 0){
+          if(this.guess === this.secretWord.toUpperCase()){
+            this.open = true;
+          }
+          else{
+            this.fail= true;
+          }
+        }
+        
         this.guess='';
         <!-- alert(this.tab_guess.length); -->
       }
@@ -73,57 +91,24 @@
             </template>
           </template>
           <!-- afficher quand c'est fini -->
-          <template x-if="this.count-guess===0">
+          <template x-if="count_guess===0">
             <template x-for="(letterInfo, i) in secretWord">
-              <div x-text="letterInfo" :class="{'secretword' : letterInfo}"></div>
+              <div x-text="letterInfo" :class="{'secretWord' : letterInfo}"></div>
             </template>
           </template>
-          <div class="answer-grid"></div>
-          <div class="answer-grid"></div>
-          <div class="answer-grid"></div>
-          <div class="answer-grid"></div>
-          <div class="answer-grid"></div>
-            <!-- <div></div> -->
-            <!-- <div>T</div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            
-            <div></div>
-            <div>U</div>
-            <div></div>
-            <div></div>
-            <div></div>
-            
-            <div></div>
-            <div></div>
-            <div>L</div>
-            <div></div>
-            <div></div>
-            
-            <div></div>
-            <div></div>
-            <div></div>
-            <div>I</div>
-            <div></div>
-            
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div>P</div>
-             -->
-             <!-- <div></div>
-             <div></div>
-             <div></div>
-             <div></div>
-             <div></div> -->
+          <div x-show="!open" class="answer-grid"></div>
+          <div x-show="!open" class="answer-grid"></div>
+          <div x-show="!open" class="answer-grid"></div>
+          <div x-show="!open" class="answer-grid"></div>
+          <div x-show="!open" class="answer-grid"></div>
+          
+          
             </section>
-            
-        </article>
+          </article>
       <!--  -->
        <p x-text="count_guess + ' mots restants'"></p>
+       <p x-show="open && !fail" x-text="'Bravo ! T\'as bien trouvé le mot :  '+ secretWord"></p>
+       <p x-show="!open && fail" x-text="'Nice try fréro, le mot était :  '+ secretWord"></p>
        <i class="fa-solid fa-house"></i>
     </main>
 
