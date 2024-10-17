@@ -8,8 +8,8 @@
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css"/>
 </head>
-  <body x-data="{
-    words: ['table', 'chaud', 'mango', 'lapin', 'fruit', 'plage', 'Terre', 'Monde', 'Livre', 'Fleur', 'Balle', 'Plage', 'Pomme', 'Chien', 'Force', 'Paire', 'Lourd', 'Plume', 'Vivre', 'Maman', 'Neige'],
+<body x-data="{
+    words: ['table', 'chaud', 'mango', 'lapin', 'fruit', 'plage', 'Terre', 'Monde', 'Livre', 'Fleur', 'Balle', 'Plage', 'Pomme', 'Chien', 'Force', 'Paire', 'Lourd', 'Plume', 'Vivre', 'Maman', 'Neige', 'Excellent', 'Succulent', 'Restaurant'],
     guess:'',
     open: false,
     fail: false,
@@ -81,7 +81,7 @@
       <p>Minuteur : </p>
       <!-- GRID -->
       <article class="grid-container">
-        <section>
+        <section :style="'grid-template-columns: repeat(' + secretWord.length + ', 1fr)'">
           <template x-for="(word, index) in tab_guess.slice().reverse()" >
             <!-- Slice() : crée une copie du tableau -->
             <template x-for="(letterInfo, i) in word" :key="i" >
@@ -94,11 +94,15 @@
               <div x-text="letterInfo" :class="{'secretWord' : letterInfo}"></div>
             </template>
           </template>
+          <!-- Essai -->
+          <template x-for="letter in secretWord">
+            <div x-show="!open" class="answer-grid"></div>
+          </template>
+          <!-- <div x-show="!open" class="answer-grid"></div>
           <div x-show="!open" class="answer-grid"></div>
           <div x-show="!open" class="answer-grid"></div>
           <div x-show="!open" class="answer-grid"></div>
-          <div x-show="!open" class="answer-grid"></div>
-          <div x-show="!open" class="answer-grid"></div>
+          <div x-show="!open" class="answer-grid"></div> -->
           
           
             </section>
@@ -111,7 +115,7 @@
     </main>
 
     <section class="answer">
-      <input type="text" placeholder="Devine le mot" maxlength="5" x-model="guess"> <!-- A changer max-lenght -->
+      <input type="text" placeholder="Devine le mot" :maxlength="secretWord.length" x-model="guess"> <!-- A changer max-lenght -->
       <button @click="lotus()">Entrer</button>
     </section>
     
