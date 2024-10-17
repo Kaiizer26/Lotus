@@ -24,7 +24,6 @@
       this.randomIndex= Math.floor(Math.random() * this.words.length);
       this.secretWord= this.words[this.randomIndex].toUpperCase();
       this.correctPositions= Array(this.secretWord.length).fill(false);
-      alert(this.secretWord);
     },
     
     lotus() {
@@ -46,7 +45,6 @@
         }
         if(this.guess === this.secretWord.toUpperCase()){
           this.open=true;
-          alert(this.open && !this.fail);
           this.count_guess=0;
         }
         if(this.count_guess === 0 && this.keep){
@@ -56,6 +54,7 @@
           }
           else{
             this.fail= true;
+            this.open=true;
           }
         }
         
@@ -107,7 +106,7 @@
       <!--  -->
        <p x-text="count_guess + ' mots restants'"></p>
        <p x-show="open && !fail" x-text="'Bravo ! T\'as bien trouvé le mot :  '+ secretWord"></p>
-       <p x-show="!open && fail" x-text="'Nice try fréro, le mot était :  '+ secretWord"></p>
+       <p x-show="fail" x-text="'Nice try fréro, le mot était :  '+ secretWord"></p>
        <i class="fa-solid fa-house"></i>
     </main>
 
