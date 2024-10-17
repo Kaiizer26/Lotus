@@ -40,7 +40,7 @@
                 });
             }
             
-        if (this.tab_guess.length < 6){
+        if (this.tab_guess.length < 6 && !this.open){
           this.tab_guess.push(this.tab_words);
           this.count_guess--;
         }
@@ -49,9 +49,10 @@
           alert(this.open && !this.fail);
           this.count_guess=0;
         }
-        if(this.count_guess === 0){
+        if(this.count_guess === 0 && this.keep){
           if(this.guess === this.secretWord.toUpperCase()){
             this.open = true;
+            this.keep = false;
           }
           else{
             this.fail= true;
@@ -59,11 +60,9 @@
         }
         
         this.guess='';
-        <!-- alert(this.tab_guess.length); -->
       }
     }
   }">
-  <!-- this.tab_words[i]= this.guess[i]; -->
     <header>
       <nav>
         <!-- <img src="" alt="accueil" /> -->
