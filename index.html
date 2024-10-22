@@ -79,7 +79,7 @@
       </nav>
     </header>
     <main class="main-page">
-      <p>Minuteur : </p>
+      <p>Devinez le mot !</p>
       <!-- GRID -->
       <article class="grid-container">
         <section :style="'grid-template-columns: repeat(' + secretWord.length + ', 1fr)'">
@@ -99,11 +99,6 @@
           <template x-for="letter in secretWord">
             <div x-show="!open" class="answer-grid"></div>
           </template>
-          <!-- <div x-show="!open" class="answer-grid"></div>
-          <div x-show="!open" class="answer-grid"></div>
-          <div x-show="!open" class="answer-grid"></div>
-          <div x-show="!open" class="answer-grid"></div>
-          <div x-show="!open" class="answer-grid"></div> -->
           
           
             </section>
@@ -112,12 +107,13 @@
        <p x-text="count_guess + ' mots restants'"></p>
        <p x-show="open && !fail" x-text="'Bravo ! T\'as bien trouvé le mot :  '+ secretWord"></p>
        <p x-show="fail" x-text="'Nice try fréro, le mot était :  '+ secretWord"></p>
+       <p x-show="fail" x-text="-100 aura"></p>
        <i class="fa-solid fa-house"></i>
     </main>
 
     <section class="answer">
-      <input type="text" placeholder="Devine le mot" :maxlength="secretWord.length" x-model="guess"> <!-- A changer max-lenght -->
-      <button @click="lotus()">Entrer</button>
+      <input type="text" placeholder="Devine le mot" :maxlength="secretWord.length" x-model="guess" @keyup.enter="lotus()"> <!-- A changer max-lenght -->
+      <button @click="lotus()" >Entrer</button>
     </section>
     
 
@@ -126,42 +122,7 @@
 
 
 
-    <!-- <section class="section-page">
-      <article class="keys">
-        <img src="images/A--Streamline-Ultimate.svg" alt="A" />
-        <img src="images/Z--Streamline-Ultimate.svg" alt="Z" />
-        <img src="images/E--Streamline-Ultimate.svg" alt="E" />
-        <img src="images/R--Streamline-Ultimate.svg" alt="R" />
-        <img src="images/T--Streamline-Ultimate.svg" alt="T" />
-        <img src="images/Y--Streamline-Ultimate.svg" alt="Y" />
-        <img src="images/U--Streamline-Ultimate.svg" alt="U" />
-        <img src="images/I--Streamline-Ultimate.svg" alt="I" />
-        <img src="images/O--Streamline-Ultimate.svg" alt="O" />
-        <img src="images/P--Streamline-Ultimate.svg" alt="P" />
-
-        <img src="images/Q--Streamline-Ultimate.svg" alt="Q" />
-        <img src="images/S--Streamline-Ultimate.svg" alt="S" />
-        <img src="images/D--Streamline-Ultimate.svg" alt="D" />
-        <img src="images/F--Streamline-Ultimate.svg" alt="F" />
-        <img src="images/G--Streamline-Ultimate.svg" alt="G" />
-        <img src="images/H--Streamline-Ultimate.svg" alt="H" />
-        <img src="images/J--Streamline-Ultimate.svg" alt="J" />
-        <img src="images/K--Streamline-Ultimate.svg" alt="K" />
-        <img src="images/L--Streamline-Ultimate.svg" alt="L" />
-        <img src="images/M--Streamline-Ultimate.svg" alt="M" />
-
-        <img src="images/W--Streamline-Ultimate.svg" alt="W" />
-        <img src="images/X--Streamline-Ultimate.svg" alt="X" />
-        <img src="images/C--Streamline-Ultimate.svg" alt="C" />
-        <img src="images/V--Streamline-Ultimate.svg" alt="V" />
-        <img src="images/B--Streamline-Ultimate.svg" alt="B" />
-        <img src="images/N--Streamline-Ultimate.svg" alt="N" />
-        <img src="" alt="" />
-        <img src="" alt="" />
-        <img src="images/tag-delete-svgrepo-com.svg" alt="RETOUR" />
-        <img src="images/enter2.svg" alt="CONFIRMER" />
-      </article>
-    </section> -->
+   
     <script>
       const section = document.querySelector('main section');
         const submitButton = document.getElementById('submit');
